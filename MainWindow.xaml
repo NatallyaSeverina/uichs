@@ -1,0 +1,202 @@
+﻿<Window x:Class="UICHS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        
+        xmlns:Custom="http://www.galasoft.ch/mvvmlight"
+        xmlns:local="clr-namespace:UICHS"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        mc:Ignorable="d"
+        Title="УИЧС"  WindowState="Normal" WindowStartupLocation="CenterScreen" MinHeight="850" MinWidth="800"  Icon="Images\Icon.ico" Style="{StaticResource WindowStyle}"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding UnLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <local:PurishedToColorConverter x:Key="PerishedToColorConverter" />
+        <local:ToRegistrationToColorConverter x:Key="ToRegistrationToColorConverter"></local:ToRegistrationToColorConverter>
+        <Style x:Key="PerishedStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{Binding Perished, Converter={StaticResource PerishedToColorConverter}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ControlForegroundWhite}"></Setter>
+            <Setter Property="BorderThickness" Value="1 0 0 0" />
+        </Style>
+        <Style  TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="{Binding ToRegistration, Converter={StaticResource ToRegistrationToColorConverter}}" />
+           
+        </Style>
+        <Style x:Key="PerishedChildrenStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{Binding PerishedChildren, Converter={StaticResource PerishedToColorConverter}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ControlForegroundWhite}"></Setter>
+            <Setter Property="BorderThickness" Value="1 0 0 0" />
+        </Style>
+    </Window.Resources>
+        <Grid  DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+            <ColumnDefinition Width="2.2*"></ColumnDefinition>
+            
+        </Grid.ColumnDefinitions>
+        <Menu  VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="0">
+            <MenuItem Header="ЧС">
+                <MenuItem Header="Добавить" Command="{Binding AddEmergencyCommand}" ></MenuItem>
+                <MenuItem Header="Редактировать" Command="{Binding EditEmergencyCommand}" IsEnabled="{Binding IsEditEmergencyEnable}"></MenuItem>
+                <MenuItem Header="Удалить" Command="{Binding DeleteEmergencyCommand}" IsEnabled="{Binding IsEditEmergencyEnable}" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Сводка">
+                <MenuItem Command="{Binding AddReportCommand}" IsEnabled="{Binding IsAddReportEnable}" Header="Добавить" ></MenuItem>
+                <MenuItem Command="{Binding OpenReportCommand}" IsEnabled="{Binding IsDeleteReportEnable}" Header="Просмотреть" ></MenuItem>
+                <MenuItem Command="{Binding DeleteReportCommand}" IsEnabled="{Binding IsDeleteReportEnable}" Header="Удалить"  ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка" >
+                <MenuItem Command="{Binding AboutProgrammCommand}" Header="О программе"/>
+            </MenuItem>
+            <MenuItem Header="XML документ" >
+                <MenuItem Command="{Binding WriteXMLDocCommand}" Header="Записать"/>
+                <MenuItem Command="{Binding ReadXMLDocCommand}" Header="Считать информацию"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Background="{StaticResource ControlLightBackground}"  Grid.Row="1" Grid.ColumnSpan="3">
+           
+            <ToolBar >
+                <TextBlock  Margin="5,3,0,0"  Text="ЧС"></TextBlock>
+                <Button Margin="10,0,10,0"  Command="{Binding AddEmergencyCommand}" >
+                    <ContentControl  Content="{StaticResource add_messageStyle0}" ></ContentControl>
+                </Button>
+                <Button  Margin="10,0,10,0" IsEnabled="{Binding IsEditEmergencyEnable}"   Command="{Binding EditEmergencyCommand}" >
+                    <ContentControl  Content="{StaticResource edit_messageStyle0}" ></ContentControl>
+                </Button>
+                <Button  Margin="10,0,10,0" IsEnabled="{Binding IsEditEmergencyEnable}"  Command="{Binding DeleteEmergencyCommand}" >
+                    <ContentControl  Content="{StaticResource delete_messageStyle0}" ></ContentControl>
+                </Button>
+                <Separator></Separator>
+                <TextBlock  Margin="0,3,0,0"  Text="Сводка"></TextBlock>
+                <Button  Margin="10,0,10,0" Command="{Binding AddReportCommand}" IsEnabled="{Binding IsAddReportEnable}"  >
+                    <ContentControl  Content="{StaticResource add_reportStyle0}" ></ContentControl>
+                </Button>
+                <Button  Margin="10,0,10,0" Command="{Binding OpenReportCommand}" IsEnabled="{Binding IsDeleteReportEnable}"  >
+                    <ContentControl  Content="{StaticResource open_reportStyle0}" ></ContentControl>
+                </Button>
+                <Button Command="{Binding DeleteReportCommand}"  Margin="10,0,10,0" IsEnabled="{Binding IsDeleteReportEnable}"  >
+                    <ContentControl  Content="{StaticResource delete_reportStyle0}" ></ContentControl>
+                </Button>
+                <Separator></Separator>
+                <Label Width="660"></Label>
+            </ToolBar>
+             <ToolBar >
+                <TextBlock  Margin="0,3,0,0" Text="Пользователь"></TextBlock>
+                <Button  Margin="10,0,10,0"  Command="{Binding ChangeUserCommand}" >
+                    <ContentControl  Content="{StaticResource reply_peopleStyle0}" ></ContentControl>
+                </Button>
+                <Button  Margin="10,0,10,0"  Command="{Binding UserSettingCommand}"  >
+                    <ContentControl  Content="{StaticResource settingsStyle0}"></ContentControl>
+                </Button>
+           
+        </ToolBar>
+        </ToolBarTray>
+        <StatusBar  Grid.ColumnSpan="5" Grid.Row="5" >
+            <Label Content="{Binding StatusBarInfo}"></Label>
+        </StatusBar>
+        <GroupBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Header="Выберите дату дежурства">
+            <StackPanel>
+                <Label Content="{Binding Path=Time}" Margin="0,20,0,15" Grid.Column="1" Foreground="#FFEEEFFF"  HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" FontSize="30"/>
+                <DatePicker Margin="0,15,0,20" Height="36" Width="130" FontSize="18" SelectedDate="{Binding SelectedDate}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDatesChanged">
+                            <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding SelectedDateCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
+                <Calendar Visibility="Hidden" IsTodayHighlighted="True"  FirstDayOfWeek="Monday" SelectedDate="{Binding SelectedDate}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDatesChanged">
+                    <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding SelectedDateCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+          </StackPanel>
+        </GroupBox>
+
+        <GroupBox   Header="Информация о ЧС за дежурные сутки" Margin="0,5,0,0" Grid.ColumnSpan="4" Grid.Row="4">
+            <DataGrid  ItemsSource="{Binding EmergencySituations}" SelectedItem="{Binding CurrentEmergency}" AutoGenerateColumns="False" IsReadOnly="True"
+                       HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="auto" Width="auto">
+            <DataGrid.ContextMenu>
+            <ContextMenu>
+                        <MenuItem Command="{Binding EditEmergencyCommand}" Header="Редактировать" IsEnabled="{Binding IsEditEmergencyEnable}"></MenuItem>
+                        <MenuItem Command="{Binding DeleteEmergencyCommand}" Header="Удалить" IsEnabled="{Binding IsEditEmergencyEnable}"></MenuItem>
+                
+            </ContextMenu>
+            </DataGrid.ContextMenu>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding SelectionChangedDataGridCommand}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding EditEmergencyCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding DateOfEmergency, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время" Binding="{Binding RegistrationTime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Область" Binding="{Binding Region}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Район" Binding="{Binding Neighborhood}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Населенный пункт" Binding="{Binding PopylatedLocality}"></DataGridTextColumn>
+                <DataGridTextColumn Width="450" Header="Описание" Binding="{Binding DescriptionOfEmergency}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                <DataGridTextColumn Header="Пог." Binding="{Binding Perished}" CellStyle="{StaticResource PerishedStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Пог.дет." Binding="{Binding PerishedChildren}" CellStyle="{StaticResource PerishedChildrenStyle}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Выезд" Binding="{Binding CheckOutTime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Прибытие" Binding="{Binding ArrivalTime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Локализ." Binding="{Binding TimeLocalisation}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ликвид." Binding="{Binding TimeLiquidation}"></DataGridTextColumn>-->
+                <DataGridCheckBoxColumn IsReadOnly="True" Header="В сводку" Binding="{Binding ToReport}">
+                    <DataGridCheckBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                        </Style>
+                    </DataGridCheckBoxColumn.ElementStyle>
+                </DataGridCheckBoxColumn>
+            
+            <DataGridCheckBoxColumn IsReadOnly="True" Header="Учетный" Binding="{Binding ToRegistration}">
+                <DataGridCheckBoxColumn.ElementStyle>
+                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                    </Style>
+                </DataGridCheckBoxColumn.ElementStyle>
+            </DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+
+            <!--<DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn.ElementStyle>
+                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                    </Style>
+                </DataGridCheckBoxColumn.ElementStyle>
+            </DataGridCheckBoxColumn>-->
+        </DataGrid> 
+        </GroupBox>
+        <GroupBox Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Header="Количество ЧС за дежурные сутки">
+            <local:ChartControl ></local:ChartControl>
+        </GroupBox>
+        <GroupBox Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Header="Количество ЧС с начала года">
+            <local:EmergenciesInfoByRegion  ></local:EmergenciesInfoByRegion>
+        </GroupBox>
+        
+        <!--<Label Content="{Binding Path=Time}" Grid.Column="1"  HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" FontSize="32"/>-->
+       
+    </Grid>
+</Window>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="UICHS.AuthenticationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UICHS"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:Custom="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d" 
+             d:DesignHeight="180" d:DesignWidth="190"   DataContext="{Binding Source={StaticResource Locator},Path=AuthenticationVM}">
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Unloaded">
+            <Custom:EventToCommand  MustToggleIsEnabledValue="True" Command="{Binding UnLoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+           </Grid.ColumnDefinitions>
+        <Viewbox Grid.ColumnSpan="3" Grid.RowSpan="4">
+            <Path Stretch="Fill" Data="{StaticResource userStyle0}" Stroke="LightGray"/>
+        </Viewbox>
+
+        <Label Content="Логин" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="1" Margin="3" Text="{Binding Login, Mode=TwoWay}"/>
+        <Label VerticalAlignment="Center"  Grid.Row="1" Content="Пароль" HorizontalAlignment="Right"/>
+        <PasswordBox Grid.Row="1" Grid.Column="1" Margin="3"  Name="PasswordBox" PasswordChar="*"></PasswordBox>
+        
+         <Button Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Width="70" Height="25" Content="Войти"
+               Command="{Binding LoginCommand}"  CommandParameter="{Binding ElementName=PasswordBox}" IsDefault="True"/>
+        <Button Grid.Row="2" Grid.RowSpan="2" Grid.Column="2" Width="70" Height="25" 
+               Content="Отмена"  
+               Command="{Binding CancelCommand}"/>
+       
+       
+            
+    </Grid>
+</UserControl>
