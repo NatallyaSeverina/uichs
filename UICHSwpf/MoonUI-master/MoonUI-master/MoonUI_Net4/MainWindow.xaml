@@ -1,0 +1,57 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="MoonUI_Net4.MainWindow"
+	x:Name="Window"
+	Title="MainWindow"
+	Width="640" Height="480" Background="#FFF8F8F8">
+
+	<Grid x:Name="LayoutRoot">
+
+        <Button Content="Обычная" HorizontalAlignment="Left" Margin="57,36.84,0,0" VerticalAlignment="Top" Width="102.2" Height="40" HorizontalContentAlignment="Center"/>
+        <Button Content="Синяя" UseLayoutRounding="True" HorizontalAlignment="Left" Margin="57,81,0,0" VerticalAlignment="Top" Width="102.2" Height="40" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonBlue}"/>
+		<Button Content="Зеленая" UseLayoutRounding="True" HorizontalAlignment="Left" Margin="57,125,0,0" VerticalAlignment="Top" Width="102.2" Height="40" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonGreen}"  />
+		<Button Content="Оранжевая" UseLayoutRounding="True" HorizontalAlignment="Left" Margin="57,169,0,0" VerticalAlignment="Top" Width="102.2" Height="40.16" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonOrange}"/>
+        <Button IsEnabled="False" UseLayoutRounding="True" Content="Обычная" HorizontalAlignment="Left" Margin="163,37,0,0" Width="102" HorizontalContentAlignment="Center" Height="40" VerticalAlignment="Top" Name="BTN1" />
+        <Button IsEnabled="False" UseLayoutRounding="True" Content="Синяя" HorizontalAlignment="Left" Margin="163.2,81,0,0" VerticalAlignment="Top" Width="102.2" Height="40.16" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonBlue}" Name="BTN2" />
+		<Button IsEnabled="False" UseLayoutRounding="True" Content="Зеленая" HorizontalAlignment="Left" Margin="163.2,125,0,0" VerticalAlignment="Top" Width="102.2" Height="40.16" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonGreen}" Name="BTN3" />
+		<Button IsEnabled="False" UseLayoutRounding="True" Content="Оранжевая" HorizontalAlignment="Left" Margin="163.2,169,0,0" VerticalAlignment="Top" Width="102.2" Height="40.16" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonOrange}" Name="BTN4" />
+		<CheckBox Content="Чекбокс" UseLayoutRounding="True" HorizontalAlignment="Left" Margin="57,0,0,198" VerticalAlignment="Bottom"/>
+		<CheckBox IsEnabled="False" UseLayoutRounding="True" Content="Чекбокс (откл.)" HorizontalAlignment="Left" Margin="163,0,0,198" VerticalAlignment="Bottom"/>
+		<CheckBox IsChecked="True" Content="Чекбокс" UseLayoutRounding="True" HorizontalAlignment="Left" Margin="57,0,0,166" VerticalAlignment="Bottom" Style="{DynamicResource CheckBoxSwitcher}"/>
+		<CheckBox IsEnabled="False" UseLayoutRounding="True" Content="Чекбокс (откл.)" HorizontalAlignment="Left" Margin="163,0,0,166" VerticalAlignment="Bottom" Style="{DynamicResource CheckBoxSwitcher}"/>
+		<ProgressBar  UseLayoutRounding="True" Height="18" Margin="0,37,69.6,0" VerticalAlignment="Top" Value="70" HorizontalAlignment="Right" Width="241"/>
+        <ProgressBar HorizontalAlignment="Right" Height="20.16" Margin="0,59,70.4,0" VerticalAlignment="Top" Width="241.6" Value="40" IsIndeterminate="True"/>
+        <!--<ComboBox HorizontalAlignment="Right" Margin="0,130.52,69.4,0" VerticalAlignment="Top" Width="241.6" Height="34.56" SelectedIndex="0">
+			<System:String>Элемент</System:String>
+			<System:String>Элемент 2</System:String>
+        </ComboBox> -->
+        <Slider HorizontalAlignment="Right" Margin="0,192,71,211" Width="242" Value="3" TickPlacement="TopLeft" AutoToolTipPlacement="TopLeft" Maximum="20"/>
+		<RadioButton Content="Обычная" HorizontalAlignment="Left" Margin="57,0,0,48" VerticalAlignment="Bottom" />
+		<ListBox HorizontalAlignment="Right" Height="87.96" Margin="0,0,69.4,118" VerticalAlignment="Bottom" Width="241.6" Grid.RowSpan="2">
+            <ListBoxItem Content="Элемент 1" />
+            <ListBoxItem Content="Элемент 2" />
+            <ListBoxItem Content="Элемент 3" />
+            <ListBoxItem Content="Элемент 4" />
+            <ListBoxItem Content="Элемент 5" />
+        </ListBox>
+		<RadioButton Content="Увеличенная" Margin="158,0,0,44" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource RadioButtonLarge}" />
+		<RadioButton IsEnabled="False" Content="Отключенная" HorizontalAlignment="Left" Margin="57,0,0,20" VerticalAlignment="Bottom" />
+		<TextBox HorizontalAlignment="Right" Margin="0,0,200,76" TextWrapping="Wrap" Text="ТекстБокс" VerticalAlignment="Bottom" d:LayoutOverrides="Height" Width="111" />
+		<TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="0,0,64,76" TextWrapping="Wrap" Text="ТекстБокс (отключен)" VerticalAlignment="Bottom" Width="130" d:LayoutOverrides="Height" />
+        <ComboBox Margin="0,0,71,320" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="241.2" SelectedIndex="0">
+            <ComboBoxItem Content="Элемент 1" />
+            <ComboBoxItem Content="Элемент 2" />
+        </ComboBox>
+        <CheckBox IsChecked="False" Content="Чекбокс" UseLayoutRounding="True" HorizontalAlignment="Right" Margin="0,293,353,0" VerticalAlignment="Top" Style="{DynamicResource CheckToogleButton}" Height="30" Width="208" FontWeight="Normal" />
+        <CheckBox IsEnabled="False" IsChecked="True" Content="Чекбокс (откл.)" UseLayoutRounding="True" HorizontalAlignment="Right" Margin="0,335,353,76" Style="{DynamicResource CheckToogleButton}" Width="207"/>
+        <Slider HorizontalAlignment="Right" Margin="0,30.467,21,178" Width="34.8" Value="3" Orientation="Vertical" d:LayoutOverrides="VerticalAlignment"/>
+        <ComboBox IsEnabled="False" HorizontalAlignment="Right" Margin="0,0,71,276" SelectedIndex="0" VerticalAlignment="Bottom" Width="241.2">
+            <ComboBoxItem Content="Элемент 1" />
+            <ComboBoxItem Content="Элемент 2" />
+        </ComboBox>
+        <Button Content="Нажатая" Height="40" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="314,377,0,0" VerticalAlignment="Top" Width="102.2" />
+    </Grid>
+</Window>
